@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#3366CC</color>      <!-- Replace with your desired blue color -->
+    <color name="purple">#9933FF</color>    <!-- Replace with your desired purple color -->
+    <color name="yellow">#FFC107</color>    <!-- Replace with your desired yellow color -->
+    <color name="GreenishBlue">#009999</color>
+    <color name="Olive">#808000</color>
+    <color name="Teal">#008080</color>
+    <color name="red">#E43124</color>
+    <color name="greeting">Welcome\nto\n <b>Tic_Tac_Toe Game</b></color>
+    <color name="WinningCellColor">#19C7DD</color>
+    <color name="Yellow">#CAB816</color>
+</resources>

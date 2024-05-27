@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="welcome"><b>Heyy Guys😍!!</b></string>
+    <string name="first_player">Enter player X Name</string>
+    <string name="second_player">Enter player O Name</string>
+    <string name="greeting">Welcome\nto\n <b>Tic_Tac_Toe</b> Game</string>
+    <string name="StartGame">Lets play</string>
+    <string name="Restart">Restart the Game</string>
+    <string name="Note"><b>Note:-</b>When you swap players <b>\nGame will Restart</b></string>
+</resources>
