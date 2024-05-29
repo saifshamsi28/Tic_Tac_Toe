@@ -1,0 +1,11 @@
+<resources>
+    <integer-array name="player_colors">
+        <item>@color/blue</item>
+        <item>@color/purple</item>
+        <item>@color/yellow</item>
+        <item>@color/GreenishBlue</item>
+        <item>@color/Olive</item>
+        <item>@color/Teal</item>
+        <item>@color/red</item>
+    </integer-array>
+</resources>
