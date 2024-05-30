@@ -149,10 +149,10 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/restart_button"
         android:layout_width="181dp"
         android:layout_height="65dp"
-        android:background="#E91E63"
+        android:background="@drawable/custom_button"
         android:onClick="restartGame"
         android:text="@string/Restart"
         android:textColor="#E1F5FE"
@@ -180,17 +180,19 @@
         app:layout_constraintVertical_bias="0.093" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/swap_button"
         android:layout_width="141dp"
         android:layout_height="43dp"
-        android:background="#00BCD4"
+        android:background="@drawable/custom_button"
+        android:backgroundTint="@color/Teal"
+
         android:onClick="swapPlayers"
         android:text="Swap Players"
-        android:textColor="#9C27B0"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/restart_button"
         app:layout_constraintVertical_bias="0.259" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

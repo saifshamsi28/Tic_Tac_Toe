@@ -36,8 +36,9 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.MyViewHo
 
         public void bind(Player player, OnPlayerClickListener onPlayerClickListener) {
             playerName.setText(player.getName());
-            playerScore.setText(String.valueOf(MainActivity.sharedPreferences.getInt(player.getName(), 0)));
+            playerScore.setText(String.valueOf(MainActivity.sharedPreferences_score.getInt(player.getName(), 0)));
             playerName.setTextColor(player.getColor());
+            playerScore.setTextColor(player.getColor());
             itemView.setOnClickListener(v -> onPlayerClickListener.onPlayerClick(player));
         }
     }

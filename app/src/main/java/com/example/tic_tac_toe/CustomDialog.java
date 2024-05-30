@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class CustomDialog {
     private Dialog dialog;
     private Context context;
-    private TextView title, congratulate, winnerName;
+    private TextView title, congratulate, winnerName,winnerTag;
     private MainActivity2 mainActivity2;
 
     public CustomDialog(Context context, MainActivity2 mainActivity2) {
@@ -28,11 +28,21 @@ public class CustomDialog {
         title = dialog.findViewById(R.id.custom_title);
         congratulate = dialog.findViewById(R.id.congratulationTextview);
         winnerName = dialog.findViewById(R.id.winner_name);
+        winnerTag=dialog.findViewById(R.id.winner_tag);
         Button closeButton = dialog.findViewById(R.id.custom_button);
 
-        title.setText("🥳 Winner! 🥳");
-        congratulate.setText("Congratulations 🎉🥳");
-        winnerName.setText(winner);
+
+        if(!winner.contains("drawn")) {
+            title.setText("🥳 Winner! 🥳");
+            congratulate.setText("Congratulations 🎉🥳");
+            winnerName.setText(winner);
+            winnerTag.setVisibility(View.VISIBLE);
+        }else {
+            title.setVisibility(View.GONE);
+            congratulate.setText("Oops😢");
+            winnerName.setText(winner);
+            winnerTag.setVisibility(View.GONE);
+        }
         winnerName.setEllipsize(TextUtils.TruncateAt.MARQUEE);
         winnerName.setSingleLine(true);
         winnerName.setSelected(true);

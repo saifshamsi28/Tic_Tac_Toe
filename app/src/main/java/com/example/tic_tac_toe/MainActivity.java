@@ -25,7 +25,8 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
     EditText playerX, playerO;
     public static String PLAYER_1, PLAYER_2;
-    public static SharedPreferences sharedPreferences;
+    public static SharedPreferences sharedPreferences_score,sharedPreferences_matchPlayed,
+    sharedPreferences_matchDrawn;
     private RecyclerView playersRecyclerView;
     private PlayersAdapter adapter;
     private ArrayList<Player> playersList;
@@ -41,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         playerO = findViewById(R.id.O);
         playersRecyclerView = findViewById(R.id.players_recycler_view);
 
-        sharedPreferences = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
-//        if(sharedPreferences==null)
+        sharedPreferences_score = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
+        sharedPreferences_matchPlayed = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
+        sharedPreferences_matchDrawn = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
+
             loadPlayers();
 
         playersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -57,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadPlayers() {
-        Set<String> playersSet = sharedPreferences.getStringSet("players", new HashSet<>());
+        Set<String> playersSet = sharedPreferences_score.getStringSet("players", new HashSet<>());
         playersList = new ArrayList<>();
         for (String player : playersSet) {
             int color = getRandomColor();
-            playersList.add(new Player(player, sharedPreferences.getInt(player,0), color)); // Assumed initial score is 0
+            playersList.add(new Player(player, sharedPreferences_score.getInt(player,0), color)); // Assumed initial score is 0
         }
         Collections.sort(playersList, new Comparator<Player>() {
             @Override
@@ -83,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void savePlayer(String playerName) {
-        Set<String> playersSet = sharedPreferences.getStringSet("players", new HashSet<>());
+        Set<String> playersSet = sharedPreferences_score.getStringSet("players", new HashSet<>());
         playersSet.add(playerName);
-        sharedPreferences.edit().putStringSet("players", playersSet).apply();
+        sharedPreferences_score.edit().putStringSet("players", playersSet).apply();
 
         int[] playerColors = getResources().getIntArray(R.array.player_colors);
         int colorIndex = playersSet.size() % playerColors.length;

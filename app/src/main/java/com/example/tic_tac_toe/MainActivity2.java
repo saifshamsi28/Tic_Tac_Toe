@@ -82,7 +82,6 @@ public class MainActivity2 extends AppCompatActivity {
         }
     }
 
-
     private void showWinnerPopup(String winner) {
         if (customDialog != null) {
             customDialog.show(winner);
@@ -101,6 +100,10 @@ public class MainActivity2 extends AppCompatActivity {
                     cell.setColorFilter(winningCellBorderColor);
                 }
             }
+        }
+        if(!winner.contains("match")) {
+            int currentScore = MainActivity.sharedPreferences_score.getInt(winner, 0);
+            MainActivity.sharedPreferences_score.edit().putInt(winner, currentScore + 1).apply();
         }
     }
 
