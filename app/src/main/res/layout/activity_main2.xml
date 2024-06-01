@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:backgroundTint="#74B8B1"
     app:layout_constraintVertical_weight="1"
     tools:context=".MainActivity2">
 
@@ -14,7 +16,6 @@
         android:layout_marginTop="16dp"
         android:shadowColor="#11ADC1"
         android:text="@string/Note"
-        android:gravity="center"
         android:textAlignment="center"
         android:textColor="#FF5722"
         android:textSize="20sp"

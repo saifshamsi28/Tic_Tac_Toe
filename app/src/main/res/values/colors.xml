@@ -12,4 +12,5 @@
     <color name="greeting">Welcome\nto\n <b>Tic_Tac_Toe Game</b></color>
     <color name="WinningCellColor">#19C7DD</color>
     <color name="Yellow">#CAB816</color>
+    <color name="green">#47D34D</color>
 </resources>

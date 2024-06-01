@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".MainActivity">
 
     <TextView
@@ -26,14 +27,16 @@
         android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="@string/welcome"
         android:textAlignment="center"
         android:textColor="#9C27B0"
         android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="-8dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/X"
@@ -86,40 +89,69 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:background="@drawable/boarder"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:backgroundTint="#D7E2E1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@id/play_button">
 
         <TextView
             android:id="@+id/players_column"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
             android:layout_weight="1"
-            android:textStyle="bold"
             android:text="Players"
-            android:paddingEnd="50dp"
             android:textAlignment="center"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/match_played_column"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textStyle="bold"
-            android:paddingStart="50dp"
-            android:text="Game Won"
+            android:text="Match Played"
+            android:textColor="@color/GreenishBlue"
             android:textAlignment="center"
-            android:textSize="20dp" />
+            android:textSize="12dp" />
+        <TextView
+            android:id="@+id/match_won_column"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:text="Won"
+            android:textColor="@color/green"
+            android:textAlignment="center"
+            android:textSize="12dp" />
+        <TextView
+            android:id="@+id/match_lost_colum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:text="Lost"
+            android:textColor="@color/red"
+            android:textAlignment="center"
+            android:textSize="12dp" />
+        <TextView
+            android:id="@+id/match_drawn_colum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:text="Drawn"
+            android:textColor="@color/yellow"
+            android:textAlignment="center"
+            android:textSize="12dp" />
 
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/players_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

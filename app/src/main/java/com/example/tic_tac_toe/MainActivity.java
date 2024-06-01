@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,9 +26,13 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
     EditText playerX, playerO;
     public static String PLAYER_1, PLAYER_2;
-    public static SharedPreferences sharedPreferences_score,sharedPreferences_matchPlayed,
-    sharedPreferences_matchDrawn;
+//    public static SharedPreferences sharedPreferences_score,
+//            sharedPreferences_matchPlayed,
+//            sharedPreferences_matchDrawn,
+//            sharedPreferences_matchLost;
+    public static SharedPreferences sharedPreferences;
     private RecyclerView playersRecyclerView;
+    private LinearLayout players_header;
     private PlayersAdapter adapter;
     private ArrayList<Player> playersList;
 
@@ -41,10 +46,13 @@ public class MainActivity extends AppCompatActivity {
         playerX = findViewById(R.id.X);
         playerO = findViewById(R.id.O);
         playersRecyclerView = findViewById(R.id.players_recycler_view);
+        players_header=findViewById(R.id.players_header);
 
-        sharedPreferences_score = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
-        sharedPreferences_matchPlayed = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
-        sharedPreferences_matchDrawn = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
+//        sharedPreferences_score = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
+//        sharedPreferences_matchPlayed = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
+//        sharedPreferences_matchDrawn = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
+//        sharedPreferences_matchLost = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
 
             loadPlayers();
 
@@ -60,20 +68,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadPlayers() {
-        Set<String> playersSet = sharedPreferences_score.getStringSet("players", new HashSet<>());
+        // Retrieve the set of player names from shared preferences
+        Set<String> playersSet = sharedPreferences.getStringSet("players", new HashSet<>());
         playersList = new ArrayList<>();
-        for (String player : playersSet) {
-            int color = getRandomColor();
-            playersList.add(new Player(player, sharedPreferences_score.getInt(player,0), color)); // Assumed initial score is 0
-        }
-        Collections.sort(playersList, new Comparator<Player>() {
-            @Override
-            public int compare(Player p1, Player p2) {
-                // Compare players based on their scores in descending order
-                return Integer.compare(p2.getScore(), p1.getScore());
+
+        if (playersSet != null && !playersSet.isEmpty()) {
+            players_header.setVisibility(View.VISIBLE);
+
+            for (String playerName : playersSet) {
+                // Fetch the player's statistics using the player's name as a key prefix
+                int matchPlayed = sharedPreferences.getInt(playerName + "_matchPlayed", 0);
+                int matchWon = sharedPreferences.getInt(playerName + "_matchWon", 0);
+                int matchLost = sharedPreferences.getInt(playerName + "_matchLost", 0);
+                int matchDrawn = sharedPreferences.getInt(playerName + "_matchDrawn", 0);
+
+                // Assign a random color to the player
+                int color = getRandomColor();
+
+                // Create a Player object with the fetched data
+                playersList.add(new Player(playerName, matchPlayed, matchWon, matchLost, matchDrawn, color));
             }
-        });
+
+            // Sort the players list based on the number of matches won
+            Collections.sort(playersList, new Comparator<Player>() {
+                @Override
+                public int compare(Player p1, Player p2) {
+                    return Integer.compare(p2.getMatch_won(), p1.getMatch_won());
+                }
+            });
+
+        } else {
+            players_header.setVisibility(View.GONE);
+        }
     }
+
 
     private int getRandomColor() {
         Random rnd = new Random();
@@ -85,19 +113,33 @@ public class MainActivity extends AppCompatActivity {
         return playerColor;
     }
 
+//    private void savePlayer(String playerName) {
+//        Set<String> playersSet = sharedPreferences_score.getStringSet("players", new HashSet<>());
+//        playersSet.add(playerName);
+//        sharedPreferences_score.edit().putStringSet("players", playersSet).apply();
+//
+//        int[] playerColors = getResources().getIntArray(R.array.player_colors);
+//        int colorIndex = playersSet.size() % playerColors.length;
+//        int playerColor = playerColors[colorIndex];
+//
+//        // Create the Player object with the assigned color
+//        Player newPlayer = new Player(playerName, 0,0,0, 0,playerColor);
+//        playersList.add(newPlayer);
+//        adapter.notifyDataSetChanged();
+//    }
+
     private void savePlayer(String playerName) {
-        Set<String> playersSet = sharedPreferences_score.getStringSet("players", new HashSet<>());
+        Set<String> playersSet = sharedPreferences.getStringSet("players", new HashSet<>());
         playersSet.add(playerName);
-        sharedPreferences_score.edit().putStringSet("players", playersSet).apply();
+        sharedPreferences.edit().putStringSet("players", playersSet).apply();
 
-        int[] playerColors = getResources().getIntArray(R.array.player_colors);
-        int colorIndex = playersSet.size() % playerColors.length;
-        int playerColor = playerColors[colorIndex];
-
-        // Create the Player object with the assigned color
-        Player newPlayer = new Player(playerName, 0, playerColor);
-        playersList.add(newPlayer);
-        adapter.notifyDataSetChanged();
+        // Initialize stats for new player
+        if(!playersSet.contains(playerName)) {
+            sharedPreferences.edit().putInt(playerName + "_played", 0).commit();
+            sharedPreferences.edit().putInt(playerName + "_won", 0).commit();
+            sharedPreferences.edit().putInt(playerName + "_lost", 0).commit();
+            sharedPreferences.edit().putInt(playerName + "_drawn", 0).commit();
+        }
     }
 
     public void StartGame(View view) {

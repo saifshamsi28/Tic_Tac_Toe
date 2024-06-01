@@ -6,7 +6,8 @@
     <string name="greeting">Welcome\nto\n <b>Tic_Tac_Toe</b> Game</string>
     <string name="StartGame">Let\'s play</string>
     <string name="Restart">Restart the Game</string>
-    <string name="Note"><b>Note:-</b>When you swap players <b>\nGame will Restart</b></string>
+    <string name="Note"><font color="#11ADC1"><b>Note:-</b></font> <font
+        color="#FF0000">When you swap players <b>\t\t\t\t\t\t\nGame will Restart</b></font></string>
     <string name="note_2">Note:- \n1.Tap <b>"close"</b> to restart the game
         \n2.Tap empty area outside the dialog to see the result</string>
 
