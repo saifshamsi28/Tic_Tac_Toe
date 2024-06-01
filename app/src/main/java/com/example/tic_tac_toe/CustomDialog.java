@@ -70,48 +70,7 @@ public class CustomDialog {
             dialog.create();
         }
         dialog.show();
-
-        // Animate the winner_title's name
-//        message.setScaleX(0);
-//        message.setScaleY(0);
-//        message.animate().scaleX(1).scaleY(1).setDuration(500).start();
     }
-
-    private void incrementStatsForWinner(int winnerIndex) {
-        int currentScore;
-        int currentMatchPlayed;
-        int currentLost;
-        int currentDrawn;
-//        currentMatchPlayed=MainActivity.sharedPreferences_matchPlayed.getInt(MainActivity.PLAYER_1, 0);
-//        MainActivity.sharedPreferences_matchPlayed.edit().putInt(MainActivity.PLAYER_1,currentMatchPlayed + 1).apply();
-//        currentMatchPlayed=MainActivity.sharedPreferences_matchPlayed.getInt(MainActivity.PLAYER_2, 0);
-//        MainActivity.sharedPreferences_matchPlayed.edit().putInt(MainActivity.PLAYER_2, currentMatchPlayed + 1).apply();
-//        if(winnerIndex ==1){
-//            //increment Score for player 1
-//            currentScore = MainActivity.sharedPreferences_score.getInt(MainActivity.PLAYER_1, 0);
-//            MainActivity.sharedPreferences_score.edit().putInt(MainActivity.PLAYER_1, currentScore + 1).apply();
-//
-//            //increment match lost for player 2
-//            currentLost = MainActivity.sharedPreferences_matchLost.getInt(MainActivity.PLAYER_2, 0);
-//            MainActivity.sharedPreferences_matchLost.edit().putInt(MainActivity.PLAYER_2, currentLost + 1).apply();
-//        }
-//        else if(winnerIndex==2){
-//            //increment Score for player 2
-//            currentScore = MainActivity.sharedPreferences_score.getInt(MainActivity.PLAYER_2, 0);
-//            MainActivity.sharedPreferences_score.edit().putInt(MainActivity.PLAYER_2, currentScore + 1).apply();
-//
-//            //increment match lost for player 1
-//            currentLost = MainActivity.sharedPreferences_matchLost.getInt(MainActivity.PLAYER_1, 0);
-//            MainActivity.sharedPreferences_matchLost.edit().putInt(MainActivity.PLAYER_1, currentLost + 1).apply();
-//        }
-//        else {
-//            currentDrawn = MainActivity.sharedPreferences_matchDrawn.getInt(MainActivity.PLAYER_1, 0);
-//            MainActivity.sharedPreferences_matchDrawn.edit().putInt(MainActivity.PLAYER_1, currentDrawn + 1).apply();
-//            currentDrawn = MainActivity.sharedPreferences_matchDrawn.getInt(MainActivity.PLAYER_2, 0);
-//            MainActivity.sharedPreferences_matchDrawn.edit().putInt(MainActivity.PLAYER_2, currentDrawn + 1).apply();
-//        }
-    }
-
     public void dismiss() {
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();

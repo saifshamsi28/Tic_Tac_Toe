@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -26,10 +27,6 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
     EditText playerX, playerO;
     public static String PLAYER_1, PLAYER_2;
-//    public static SharedPreferences sharedPreferences_score,
-//            sharedPreferences_matchPlayed,
-//            sharedPreferences_matchDrawn,
-//            sharedPreferences_matchLost;
     public static SharedPreferences sharedPreferences;
     private RecyclerView playersRecyclerView;
     private LinearLayout players_header;
@@ -49,11 +46,6 @@ public class MainActivity extends AppCompatActivity {
         players_header=findViewById(R.id.players_header);
 
         sharedPreferences = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
-//        sharedPreferences_score = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
-//        sharedPreferences_matchPlayed = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
-//        sharedPreferences_matchDrawn = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
-//        sharedPreferences_matchLost = getSharedPreferences("tic_tac_toe", Context.MODE_PRIVATE);
-
             loadPlayers();
 
         playersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -69,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadPlayers() {
         // Retrieve the set of player names from shared preferences
-        Set<String> playersSet = sharedPreferences.getStringSet("players", new HashSet<>());
+        Set<String> playersSet = MainActivity.sharedPreferences.getStringSet("players", new HashSet<>());
         playersList = new ArrayList<>();
 
         if (playersSet != null && !playersSet.isEmpty()) {
@@ -77,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
             for (String playerName : playersSet) {
                 // Fetch the player's statistics using the player's name as a key prefix
-                int matchPlayed = sharedPreferences.getInt(playerName + "_matchPlayed", 0);
-                int matchWon = sharedPreferences.getInt(playerName + "_matchWon", 0);
-                int matchLost = sharedPreferences.getInt(playerName + "_matchLost", 0);
-                int matchDrawn = sharedPreferences.getInt(playerName + "_matchDrawn", 0);
+                int matchPlayed = MainActivity.sharedPreferences.getInt(playerName + "_played", 0);
+                int matchWon = MainActivity.sharedPreferences.getInt(playerName + "_won", 0);
+                int matchLost = MainActivity.sharedPreferences.getInt(playerName + "_lost", 0);
+                int matchDrawn = MainActivity.sharedPreferences.getInt(playerName + "_drawn", 0);
 
                 // Assign a random color to the player
                 int color = getRandomColor();
@@ -88,19 +80,18 @@ public class MainActivity extends AppCompatActivity {
                 // Create a Player object with the fetched data
                 playersList.add(new Player(playerName, matchPlayed, matchWon, matchLost, matchDrawn, color));
             }
-
-            // Sort the players list based on the number of matches won
+            // Sorting the players list based on the number of matches won
             Collections.sort(playersList, new Comparator<Player>() {
                 @Override
                 public int compare(Player p1, Player p2) {
                     return Integer.compare(p2.getMatch_won(), p1.getMatch_won());
                 }
             });
-
         } else {
             players_header.setVisibility(View.GONE);
         }
     }
+
 
 
     private int getRandomColor() {

@@ -83,41 +83,11 @@ public class MainActivity2 extends AppCompatActivity {
             }
         }
     }
-
-//    private void showWinnerPopup(String winner_title, boolean isDraw) {
-//        if (customDialog != null) {
-//            customDialog.show(winner_title);
-//        }
-//        if (isDraw) {
-//            // Increment matches drawn for both players
-////            incrementMatchDrawn(MainActivity.PLAYER_1);
-////            incrementMatchDrawn(MainActivity.PLAYER_2);
-////            incrementMatchPlayed(MainActivity.PLAYER_1);
-////            incrementMatchPlayed(MainActivity.PLAYER_2);
-//            Toast.makeText(this, winner_title, Toast.LENGTH_SHORT).show();
-//        } else {
-//            for (int cellIndex : winningLineCells) {
-//                if (cellIndex >= 0 && cellIndex < 9) {
-//                    @SuppressLint("DiscouragedApi") int cellId = getResources().getIdentifier("imageView" + (cellIndex + 1), "id", getPackageName());
-//                    ImageView cell = findViewById(cellId);
-//                    cell.setColorFilter(winningCellBorderColor);
-//                }
-//            }
-//            // Increment matches won and matches played
-////            incrementMatchWon(winner_title);
-////            incrementMatchPlayed(MainActivity.PLAYER_1);
-////            incrementMatchPlayed(MainActivity.PLAYER_2);
-//            Toast.makeText(this, winner_title + " won the match!", Toast.LENGTH_LONG).show();
-//        }
-////        logCurrentStats();
-//    }
-
     private void showWinnerPopup(String winner, boolean isDraw) {
         if (customDialog != null) {
             customDialog.show(winner);
         }
-
-        // Update stats
+        //incrementing total match played for both players
         incrementMatchPlayed(MainActivity.PLAYER_1);
         incrementMatchPlayed(MainActivity.PLAYER_2);
 
@@ -159,28 +129,24 @@ public class MainActivity2 extends AppCompatActivity {
         Log.d("Log of logCurrentStats p2", MainActivity.PLAYER_2 + " matches drawn: " + MainActivity.sharedPreferences.getInt(MainActivity.PLAYER_2+"_drawn", 0));
     }
     private void incrementMatchPlayed(String player) {
-//        int current = ;
         MainActivity.sharedPreferences.edit().putInt(player + "_played",
                 MainActivity.sharedPreferences.getInt(player + "_played", 0)+1).commit();
         Log.d("match played",MainActivity.sharedPreferences.getInt(player + "_played", 0)+" match played");
     }
 
     private void incrementMatchWon(String player) {
-//        int current = MainActivity.sharedPreferences.getInt(player + "_won", 0);
         MainActivity.sharedPreferences.edit().putInt(player + "_won",
                 MainActivity.sharedPreferences.getInt(player + "_won", 0)+1).commit();
         Log.d("match won",MainActivity.sharedPreferences.getInt(player + "_won", 0)+" match played");
     }
 
     private void incrementMatchLost(String player) {
-//        int current = MainActivity.sharedPreferences.getInt(player + "_lost", 0);
         MainActivity.sharedPreferences.edit().putInt(player + "_lost",
                 MainActivity.sharedPreferences.getInt(player + "_lost", 0)+1 ).commit();
         Log.d("match lost",MainActivity.sharedPreferences.getInt(player + "_lost", 0)+" match played");
     }
 
     private void incrementMatchDrawn(String player) {
-//        int current = MainActivity.sharedPreferences.getInt(player + "_drawn", 0);
         MainActivity.sharedPreferences.edit().putInt(player + "_drawn",
                 MainActivity.sharedPreferences.getInt(player + "_drawn", 0)+1).commit();
         Log.d("match drawn", MainActivity.sharedPreferences.getInt(player + "_drawn", 0)+" match played");
